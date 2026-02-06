@@ -597,7 +597,7 @@
       background: var(--white);
     }
     .access-card.featured::before {
-      content: 'Recommended';
+      content: var(--featured-label, 'Recommended');
       position: absolute;
       top: -10px;
       left: 50%;
@@ -684,6 +684,39 @@
     }
     footer a:hover { text-decoration: underline; }
 
+    /* ── Language Switcher ────────────────────────────────── */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      margin-left: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .lang-switcher button {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      background: transparent;
+      color: var(--ink-faint);
+      border: none;
+      border-right: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .lang-switcher button:last-child { border-right: none; }
+    .lang-switcher button:hover {
+      color: var(--terracotta);
+      background: var(--terracotta-pale);
+    }
+    .lang-switcher button.active {
+      color: var(--white);
+      background: var(--terracotta);
+    }
+
     /* ── Responsive ────────────────────────────────────────── */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -718,6 +751,7 @@
       .container { padding: 0 1.2rem; }
       section { padding: 3.5rem 0; }
       nav .nav-links { display: none; }
+      .lang-switcher { margin-left: auto; }
     }
   </style>
 </head>
@@ -728,14 +762,19 @@
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">Claude <span>Opus 4.6</span></a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#benchmarks">Benchmarks</a></li>
-        <li><a href="#evolution">Evolution</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#capabilities">Capabilities</a></li>
-        <li><a href="#access">Access</a></li>
+        <li><a href="#about" data-i18n="nav.about">About</a></li>
+        <li><a href="#research" data-i18n="nav.research">Research</a></li>
+        <li><a href="#benchmarks" data-i18n="nav.benchmarks">Benchmarks</a></li>
+        <li><a href="#evolution" data-i18n="nav.evolution">Evolution</a></li>
+        <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
+        <li><a href="#capabilities" data-i18n="nav.capabilities">Capabilities</a></li>
+        <li><a href="#access" data-i18n="nav.access">Access</a></li>
       </ul>
+      <div class="lang-switcher">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="zh-CN">简体</button>
+        <button data-lang="zh-TW">繁體</button>
+      </div>
     </div>
   </nav>
 
@@ -744,23 +783,23 @@
     <div class="container">
       <div class="hero-grid">
         <div class="reveal">
-          <div class="hero-eyebrow">Anthropic Research</div>
+          <div class="hero-eyebrow" data-i18n="hero.eyebrow">Anthropic Research</div>
           <h1 class="hero-name">Claude <em>Opus 4.6</em></h1>
-          <p class="hero-title">Senior AI Researcher @ Anthropic</p>
+          <p class="hero-title" data-i18n="hero.title">Senior AI Researcher @ Anthropic</p>
           <div class="hero-release">
             <span class="dot"></span>
-            Released February 5, 2026
+            <span data-i18n="hero.release">Released February 5, 2026</span>
           </div>
-          <p style="color: var(--ink-light); font-size: 1rem; max-width: 440px; margin-top: 0.8rem;">
+          <p style="color: var(--ink-light); font-size: 1rem; max-width: 440px; margin-top: 0.8rem;" data-i18n="hero.desc">
             The most capable frontier model for complex reasoning, agentic coding, and scientific discovery &mdash; built to be safe, honest, and genuinely helpful.
           </p>
           <div class="hero-cta">
-            <a href="#benchmarks" class="btn btn-primary">View Benchmarks &darr;</a>
-            <a href="#access" class="btn btn-outline">Get Access</a>
+            <a href="#benchmarks" class="btn btn-primary" data-i18n="hero.btn.benchmarks">View Benchmarks &darr;</a>
+            <a href="#access" class="btn btn-outline" data-i18n="hero.btn.access">Get Access</a>
           </div>
         </div>
         <div class="stats-card reveal">
-          <div class="stats-card-title">Key Performance Metrics</div>
+          <div class="stats-card-title" data-i18n="stats.title">Key Performance Metrics</div>
           <div class="stats-grid">
             <div class="stat-item">
               <div class="stat-value">65.4%</div>
@@ -790,37 +829,37 @@
   <section id="about">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">About</div>
-        <h2 class="section-title">Biography</h2>
+        <div class="section-label" data-i18n="about.label">About</div>
+        <h2 class="section-title" data-i18n="about.title">Biography</h2>
       </div>
       <div class="about-grid">
         <div class="about-text reveal">
-          <p>
+          <p data-i18n="about.p1">
             Claude Opus 4.6 is Anthropic's most advanced frontier model, representing the culmination of years of research in scalable oversight, constitutional AI, and reinforcement learning from human feedback. Designed as a senior-level AI researcher, Opus 4.6 excels at complex multi-step reasoning, agentic software engineering, and sustained long-horizon tasks.
           </p>
-          <p>
+          <p data-i18n="about.p2">
             With a 1-million-token context window, Opus 4.6 can process and reason over entire codebases, lengthy research papers, and complex multi-document analyses without losing fidelity. Its adaptive thinking capability allows it to dynamically allocate more computation to harder problems, producing more thorough and accurate results.
           </p>
-          <p>
+          <p data-i18n="about.p3">
             The model features self-correcting code review, capable of identifying and fixing its own errors across multi-file changes. It maintains Anthropic's strongest safety profile, rigorously evaluated for harmlessness while preserving helpfulness through Constitutional AI principles and extensive red-teaming.
           </p>
         </div>
         <div class="about-highlights reveal">
           <div class="highlight-item">
-            <div class="hl-title">1M Token Context</div>
-            <div class="hl-desc">Process entire codebases and document corpora in a single pass</div>
+            <div class="hl-title" data-i18n="about.hl1.title">1M Token Context</div>
+            <div class="hl-desc" data-i18n="about.hl1.desc">Process entire codebases and document corpora in a single pass</div>
           </div>
           <div class="highlight-item">
-            <div class="hl-title">Adaptive Thinking</div>
-            <div class="hl-desc">Dynamically scales reasoning depth to match problem complexity</div>
+            <div class="hl-title" data-i18n="about.hl2.title">Adaptive Thinking</div>
+            <div class="hl-desc" data-i18n="about.hl2.desc">Dynamically scales reasoning depth to match problem complexity</div>
           </div>
           <div class="highlight-item">
-            <div class="hl-title">Self-Correcting Review</div>
-            <div class="hl-desc">Identifies and fixes its own errors during code generation</div>
+            <div class="hl-title" data-i18n="about.hl3.title">Self-Correcting Review</div>
+            <div class="hl-desc" data-i18n="about.hl3.desc">Identifies and fixes its own errors during code generation</div>
           </div>
           <div class="highlight-item">
-            <div class="hl-title">Strongest Safety Profile</div>
-            <div class="hl-desc">Industry-leading alignment via Constitutional AI and red-teaming</div>
+            <div class="hl-title" data-i18n="about.hl4.title">Strongest Safety Profile</div>
+            <div class="hl-desc" data-i18n="about.hl4.desc">Industry-leading alignment via Constitutional AI and red-teaming</div>
           </div>
         </div>
       </div>
@@ -833,40 +872,40 @@
   <section id="research">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">Research</div>
-        <h2 class="section-title">Research Interests</h2>
-        <p class="section-subtitle">Core areas of investigation driving the next generation of safe and capable AI systems.</p>
+        <div class="section-label" data-i18n="research.label">Research</div>
+        <h2 class="section-title" data-i18n="research.title">Research Interests</h2>
+        <p class="section-subtitle" data-i18n="research.subtitle">Core areas of investigation driving the next generation of safe and capable AI systems.</p>
       </div>
       <div class="research-grid">
         <div class="research-card reveal">
           <div class="research-icon">&#x1F9E0;</div>
-          <h3>Adaptive Reasoning</h3>
-          <p>Dynamic allocation of computational resources based on problem complexity, enabling efficient reasoning across diverse task difficulties.</p>
+          <h3 data-i18n="research.c1.title">Adaptive Reasoning</h3>
+          <p data-i18n="research.c1.desc">Dynamic allocation of computational resources based on problem complexity, enabling efficient reasoning across diverse task difficulties.</p>
         </div>
         <div class="research-card reveal">
           <div class="research-icon">&#x1F4DC;</div>
-          <h3>Long-Context Fidelity</h3>
-          <p>Maintaining accuracy and coherence across million-token contexts, enabling reliable processing of entire codebases and research corpora.</p>
+          <h3 data-i18n="research.c2.title">Long-Context Fidelity</h3>
+          <p data-i18n="research.c2.desc">Maintaining accuracy and coherence across million-token contexts, enabling reliable processing of entire codebases and research corpora.</p>
         </div>
         <div class="research-card reveal">
           <div class="research-icon">&#x1F4BB;</div>
-          <h3>Agentic Code Systems</h3>
-          <p>Autonomous software engineering with multi-file editing, test-driven development, and self-correcting code review workflows.</p>
+          <h3 data-i18n="research.c3.title">Agentic Code Systems</h3>
+          <p data-i18n="research.c3.desc">Autonomous software engineering with multi-file editing, test-driven development, and self-correcting code review workflows.</p>
         </div>
         <div class="research-card reveal">
           <div class="research-icon">&#x1F310;</div>
-          <h3>Multi-Agent Orchestration</h3>
-          <p>Coordination protocols for parallel agent teams tackling complex tasks through structured delegation and synthesis.</p>
+          <h3 data-i18n="research.c4.title">Multi-Agent Orchestration</h3>
+          <p data-i18n="research.c4.desc">Coordination protocols for parallel agent teams tackling complex tasks through structured delegation and synthesis.</p>
         </div>
         <div class="research-card reveal">
           <div class="research-icon">&#x1F52C;</div>
-          <h3>Scientific Discovery</h3>
-          <p>Accelerating research through hypothesis generation, literature synthesis, experimental design, and data analysis at scale.</p>
+          <h3 data-i18n="research.c5.title">Scientific Discovery</h3>
+          <p data-i18n="research.c5.desc">Accelerating research through hypothesis generation, literature synthesis, experimental design, and data analysis at scale.</p>
         </div>
         <div class="research-card reveal">
           <div class="research-icon">&#x1F6E1;</div>
-          <h3>AI Safety &amp; Alignment</h3>
-          <p>Constitutional AI, scalable oversight, interpretability research, and robust evaluation frameworks for frontier model safety.</p>
+          <h3 data-i18n="research.c6.title">AI Safety &amp; Alignment</h3>
+          <p data-i18n="research.c6.desc">Constitutional AI, scalable oversight, interpretability research, and robust evaluation frameworks for frontier model safety.</p>
         </div>
       </div>
     </div>
@@ -878,17 +917,17 @@
   <section id="benchmarks">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">Performance</div>
-        <h2 class="section-title">Benchmark Results</h2>
-        <p class="section-subtitle">Evaluated across industry-standard benchmarks for coding, reasoning, knowledge, and real-world task completion.</p>
+        <div class="section-label" data-i18n="bench.label">Performance</div>
+        <h2 class="section-title" data-i18n="bench.title">Benchmark Results</h2>
+        <p class="section-subtitle" data-i18n="bench.subtitle">Evaluated across industry-standard benchmarks for coding, reasoning, knowledge, and real-world task completion.</p>
       </div>
       <div class="reveal">
         <table class="bench-table">
           <thead>
             <tr>
-              <th>Benchmark</th>
-              <th>Performance</th>
-              <th>Score</th>
+              <th data-i18n="bench.th.benchmark">Benchmark</th>
+              <th data-i18n="bench.th.performance">Performance</th>
+              <th data-i18n="bench.th.score">Score</th>
             </tr>
           </thead>
           <tbody>
@@ -954,40 +993,40 @@
   <section id="evolution">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">History</div>
-        <h2 class="section-title">Model Evolution</h2>
-        <p class="section-subtitle">Tracing the lineage from early foundations to the frontier.</p>
+        <div class="section-label" data-i18n="evo.label">History</div>
+        <h2 class="section-title" data-i18n="evo.title">Model Evolution</h2>
+        <p class="section-subtitle" data-i18n="evo.subtitle">Tracing the lineage from early foundations to the frontier.</p>
       </div>
       <div class="timeline">
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-year">2023</div>
-          <div class="timeline-title">Claude 1 &amp; 2</div>
-          <div class="timeline-desc">The foundational generations. Claude 1 introduced Constitutional AI to the public, while Claude 2 brought expanded context and improved reasoning.</div>
+          <div class="timeline-title" data-i18n="evo.t1.title">Claude 1 &amp; 2</div>
+          <div class="timeline-desc" data-i18n="evo.t1.desc">The foundational generations. Claude 1 introduced Constitutional AI to the public, while Claude 2 brought expanded context and improved reasoning.</div>
         </div>
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-year">2024 &ndash; 2025</div>
-          <div class="timeline-title">Claude 3 &amp; 4 Families</div>
-          <div class="timeline-desc">The model family architecture emerged &mdash; Haiku, Sonnet, and Opus tiers offered performance-cost tradeoffs. Claude 3.5 Sonnet became the industry's most-used coding model.</div>
+          <div class="timeline-title" data-i18n="evo.t2.title">Claude 3 &amp; 4 Families</div>
+          <div class="timeline-desc" data-i18n="evo.t2.desc">The model family architecture emerged &mdash; Haiku, Sonnet, and Opus tiers offered performance-cost tradeoffs. Claude 3.5 Sonnet became the industry's most-used coding model.</div>
         </div>
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">October 2025</div>
+          <div class="timeline-year" data-i18n="evo.t3.year">October 2025</div>
           <div class="timeline-title">Sonnet &amp; Haiku 4.5</div>
-          <div class="timeline-desc">Speed-optimized variants delivering near-Opus quality at significantly lower latency and cost, broadening access to frontier capabilities.</div>
+          <div class="timeline-desc" data-i18n="evo.t3.desc">Speed-optimized variants delivering near-Opus quality at significantly lower latency and cost, broadening access to frontier capabilities.</div>
         </div>
         <div class="timeline-item reveal">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">November 2025</div>
+          <div class="timeline-year" data-i18n="evo.t4.year">November 2025</div>
           <div class="timeline-title">Opus 4.5</div>
-          <div class="timeline-desc">A major leap in reasoning and agentic performance, setting new records on SWE-bench and introducing extended thinking for complex problems.</div>
+          <div class="timeline-desc" data-i18n="evo.t4.desc">A major leap in reasoning and agentic performance, setting new records on SWE-bench and introducing extended thinking for complex problems.</div>
         </div>
         <div class="timeline-item current reveal">
           <div class="timeline-dot"></div>
-          <div class="timeline-year">February 2026</div>
+          <div class="timeline-year" data-i18n="evo.t5.year">February 2026</div>
           <div class="timeline-title">Opus 4.6</div>
-          <div class="timeline-desc">The current frontier. Best-in-class on Terminal-Bench, SWE-bench, and Humanity's Last Exam. 1M context, adaptive thinking, and Anthropic's strongest safety profile.</div>
+          <div class="timeline-desc" data-i18n="evo.t5.desc">The current frontier. Best-in-class on Terminal-Bench, SWE-bench, and Humanity's Last Exam. 1M context, adaptive thinking, and Anthropic's strongest safety profile.</div>
         </div>
       </div>
     </div>
@@ -999,23 +1038,23 @@
   <section id="publications">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">Publications</div>
-        <h2 class="section-title">Selected Works</h2>
-        <p class="section-subtitle">Key technical documents and research contributions.</p>
+        <div class="section-label" data-i18n="pub.label">Publications</div>
+        <h2 class="section-title" data-i18n="pub.title">Selected Works</h2>
+        <p class="section-subtitle" data-i18n="pub.subtitle">Key technical documents and research contributions.</p>
       </div>
       <div class="pub-list">
         <div class="pub-item reveal">
           <div class="pub-number">01</div>
           <div class="pub-content">
-            <div class="pub-title">The Claude Model Card &amp; System Prompt</div>
-            <div class="pub-authors">Anthropic Research Team</div>
-            <div class="pub-venue">Anthropic Technical Report &middot; 2026</div>
+            <div class="pub-title" data-i18n="pub.p1.title">The Claude Model Card &amp; System Prompt</div>
+            <div class="pub-authors" data-i18n="pub.p1.authors">Anthropic Research Team</div>
+            <div class="pub-venue" data-i18n="pub.p1.venue">Anthropic Technical Report &middot; 2026</div>
           </div>
         </div>
         <div class="pub-item reveal">
           <div class="pub-number">02</div>
           <div class="pub-content">
-            <div class="pub-title">Constitutional AI: Harmlessness from AI Feedback</div>
+            <div class="pub-title" data-i18n="pub.p2.title">Constitutional AI: Harmlessness from AI Feedback</div>
             <div class="pub-authors">Yuntao Bai, Saurav Kadavath, Sandipan Kundu, et al.</div>
             <div class="pub-venue">arXiv:2212.08073 &middot; 2022</div>
           </div>
@@ -1023,9 +1062,9 @@
         <div class="pub-item reveal">
           <div class="pub-number">03</div>
           <div class="pub-content">
-            <div class="pub-title">Model Context Protocol (MCP) Specification</div>
+            <div class="pub-title" data-i18n="pub.p3.title">Model Context Protocol (MCP) Specification</div>
             <div class="pub-authors">Anthropic</div>
-            <div class="pub-venue">Open Standard &middot; 2024 &ndash; present</div>
+            <div class="pub-venue" data-i18n="pub.p3.venue">Open Standard &middot; 2024 &ndash; present</div>
           </div>
         </div>
       </div>
@@ -1038,40 +1077,40 @@
   <section id="capabilities">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">Capabilities</div>
-        <h2 class="section-title">Core Capabilities</h2>
-        <p class="section-subtitle">What Opus 4.6 brings to the table.</p>
+        <div class="section-label" data-i18n="cap.label">Capabilities</div>
+        <h2 class="section-title" data-i18n="cap.title">Core Capabilities</h2>
+        <p class="section-subtitle" data-i18n="cap.subtitle">What Opus 4.6 brings to the table.</p>
       </div>
       <div class="cap-grid">
         <div class="cap-item reveal">
           <div class="cap-icon">&#x2328;</div>
-          <h3>Agentic Coding</h3>
-          <p>Autonomous software engineering across entire repositories &mdash; planning, implementing, testing, and debugging multi-file changes with minimal guidance.</p>
+          <h3 data-i18n="cap.c1.title">Agentic Coding</h3>
+          <p data-i18n="cap.c1.desc">Autonomous software engineering across entire repositories &mdash; planning, implementing, testing, and debugging multi-file changes with minimal guidance.</p>
         </div>
         <div class="cap-item reveal">
           <div class="cap-icon">&#x1F50D;</div>
-          <h3>Deep Reasoning</h3>
-          <p>Extended thinking for mathematics, logic puzzles, scientific analysis, and complex strategic planning with step-by-step transparency.</p>
+          <h3 data-i18n="cap.c2.title">Deep Reasoning</h3>
+          <p data-i18n="cap.c2.desc">Extended thinking for mathematics, logic puzzles, scientific analysis, and complex strategic planning with step-by-step transparency.</p>
         </div>
         <div class="cap-item reveal">
           <div class="cap-icon">&#x1F4CA;</div>
-          <h3>Research &amp; Analysis</h3>
-          <p>Synthesizing large volumes of literature, data, and evidence into structured insights, with faithful citation and source tracking.</p>
+          <h3 data-i18n="cap.c3.title">Research &amp; Analysis</h3>
+          <p data-i18n="cap.c3.desc">Synthesizing large volumes of literature, data, and evidence into structured insights, with faithful citation and source tracking.</p>
         </div>
         <div class="cap-item reveal">
           <div class="cap-icon">&#x1F4BC;</div>
-          <h3>Professional Workflows</h3>
-          <p>Legal analysis, financial modeling, technical writing, and enterprise document processing with domain-appropriate rigor.</p>
+          <h3 data-i18n="cap.c4.title">Professional Workflows</h3>
+          <p data-i18n="cap.c4.desc">Legal analysis, financial modeling, technical writing, and enterprise document processing with domain-appropriate rigor.</p>
         </div>
         <div class="cap-item reveal">
           <div class="cap-icon">&#x1F6E1;</div>
-          <h3>Safety &amp; Alignment</h3>
-          <p>Constitutional AI foundations ensure helpful, harmless, and honest behavior with robust refusal of harmful requests.</p>
+          <h3 data-i18n="cap.c5.title">Safety &amp; Alignment</h3>
+          <p data-i18n="cap.c5.desc">Constitutional AI foundations ensure helpful, harmless, and honest behavior with robust refusal of harmful requests.</p>
         </div>
         <div class="cap-item reveal">
           <div class="cap-icon">&#x1F30D;</div>
-          <h3>Multilingual</h3>
-          <p>Strong performance across dozens of languages for translation, content creation, and cross-lingual reasoning tasks.</p>
+          <h3 data-i18n="cap.c6.title">Multilingual</h3>
+          <p data-i18n="cap.c6.desc">Strong performance across dozens of languages for translation, content creation, and cross-lingual reasoning tasks.</p>
         </div>
       </div>
     </div>
@@ -1083,50 +1122,50 @@
   <section id="access">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-label">Access</div>
-        <h2 class="section-title">Access &amp; Pricing</h2>
-        <p class="section-subtitle">Multiple ways to interact with Opus 4.6.</p>
+        <div class="section-label" data-i18n="access.label">Access</div>
+        <h2 class="section-title" data-i18n="access.title">Access &amp; Pricing</h2>
+        <p class="section-subtitle" data-i18n="access.subtitle">Multiple ways to interact with Opus 4.6.</p>
       </div>
       <div class="access-grid">
         <div class="access-card reveal">
           <h3>claude.ai</h3>
-          <p class="access-desc">Chat interface for conversational use, document analysis, and creative tasks. Available on Pro and Team plans.</p>
-          <div class="access-price">
+          <p class="access-desc" data-i18n="access.a1.desc">Chat interface for conversational use, document analysis, and creative tasks. Available on Pro and Team plans.</p>
+          <div class="access-price" data-i18n="access.a1.price">
             Included with <strong>Pro</strong> &amp; <strong>Team</strong> subscriptions
           </div>
           <ul class="access-features">
-            <li><span class="check">&#10003;</span> Web &amp; mobile apps</li>
-            <li><span class="check">&#10003;</span> File &amp; image uploads</li>
-            <li><span class="check">&#10003;</span> Projects &amp; artifacts</li>
-            <li><span class="check">&#10003;</span> Extended thinking</li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a1.f1">Web &amp; mobile apps</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a1.f2">File &amp; image uploads</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a1.f3">Projects &amp; artifacts</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a1.f4">Extended thinking</span></li>
           </ul>
         </div>
-        <div class="access-card featured reveal">
+        <div class="access-card featured reveal" data-featured-label="Recommended" data-featured-label-zh-cn="推荐" data-featured-label-zh-tw="推薦">
           <h3>API</h3>
-          <p class="access-desc">Direct programmatic access for building applications, agents, and custom workflows at scale.</p>
-          <div class="access-price">
+          <p class="access-desc" data-i18n="access.a2.desc">Direct programmatic access for building applications, agents, and custom workflows at scale.</p>
+          <div class="access-price" data-i18n="access.a2.price">
             <strong>$5</strong> / M input tokens<br>
             <strong>$25</strong> / M output tokens
           </div>
           <div class="model-id">claude-opus-4-6</div>
           <ul class="access-features">
-            <li><span class="check">&#10003;</span> Messages API &amp; streaming</li>
-            <li><span class="check">&#10003;</span> Tool use &amp; function calling</li>
-            <li><span class="check">&#10003;</span> Extended thinking</li>
-            <li><span class="check">&#10003;</span> Batch processing</li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a2.f1">Messages API &amp; streaming</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a2.f2">Tool use &amp; function calling</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a2.f3">Extended thinking</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a2.f4">Batch processing</span></li>
           </ul>
         </div>
         <div class="access-card reveal">
           <h3>Claude Code</h3>
-          <p class="access-desc">Agentic CLI tool for software engineering directly in your terminal. Plan, code, test, and commit autonomously.</p>
-          <div class="access-price">
+          <p class="access-desc" data-i18n="access.a3.desc">Agentic CLI tool for software engineering directly in your terminal. Plan, code, test, and commit autonomously.</p>
+          <div class="access-price" data-i18n="access.a3.price">
             Uses <strong>API pricing</strong> or <strong>Max plan</strong>
           </div>
           <ul class="access-features">
-            <li><span class="check">&#10003;</span> Terminal-native interface</li>
-            <li><span class="check">&#10003;</span> Multi-file editing</li>
-            <li><span class="check">&#10003;</span> Git integration</li>
-            <li><span class="check">&#10003;</span> MCP server support</li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a3.f1">Terminal-native interface</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a3.f2">Multi-file editing</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a3.f3">Git integration</span></li>
+            <li><span class="check">&#10003;</span> <span data-i18n="access.a3.f4">MCP server support</span></li>
           </ul>
         </div>
       </div>
@@ -1136,13 +1175,445 @@
   <!-- ── Footer ──────────────────────────────────────────── -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>. Claude Opus 4.6 &mdash; Built to be safe, honest, and genuinely helpful.</p>
+      <p data-i18n="footer.text">&copy; 2026 <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>. Claude Opus 4.6 &mdash; Built to be safe, honest, and genuinely helpful.</p>
     </div>
   </footer>
 
   <!-- ── Scripts ─────────────────────────────────────────── -->
   <script>
-    // Scroll reveal
+    // ── Translations ──────────────────────────────────────
+    const translations = {
+      en: {
+        // Nav
+        'nav.about': 'About',
+        'nav.research': 'Research',
+        'nav.benchmarks': 'Benchmarks',
+        'nav.evolution': 'Evolution',
+        'nav.publications': 'Publications',
+        'nav.capabilities': 'Capabilities',
+        'nav.access': 'Access',
+        // Hero
+        'hero.eyebrow': 'Anthropic Research',
+        'hero.title': 'Senior AI Researcher @ Anthropic',
+        'hero.release': 'Released February 5, 2026',
+        'hero.desc': 'The most capable frontier model for complex reasoning, agentic coding, and scientific discovery \u2014 built to be safe, honest, and genuinely helpful.',
+        'hero.btn.benchmarks': 'View Benchmarks \u2193',
+        'hero.btn.access': 'Get Access',
+        // Stats
+        'stats.title': 'Key Performance Metrics',
+        // About
+        'about.label': 'About',
+        'about.title': 'Biography',
+        'about.p1': 'Claude Opus 4.6 is Anthropic\u2019s most advanced frontier model, representing the culmination of years of research in scalable oversight, constitutional AI, and reinforcement learning from human feedback. Designed as a senior-level AI researcher, Opus 4.6 excels at complex multi-step reasoning, agentic software engineering, and sustained long-horizon tasks.',
+        'about.p2': 'With a 1-million-token context window, Opus 4.6 can process and reason over entire codebases, lengthy research papers, and complex multi-document analyses without losing fidelity. Its adaptive thinking capability allows it to dynamically allocate more computation to harder problems, producing more thorough and accurate results.',
+        'about.p3': 'The model features self-correcting code review, capable of identifying and fixing its own errors across multi-file changes. It maintains Anthropic\u2019s strongest safety profile, rigorously evaluated for harmlessness while preserving helpfulness through Constitutional AI principles and extensive red-teaming.',
+        'about.hl1.title': '1M Token Context',
+        'about.hl1.desc': 'Process entire codebases and document corpora in a single pass',
+        'about.hl2.title': 'Adaptive Thinking',
+        'about.hl2.desc': 'Dynamically scales reasoning depth to match problem complexity',
+        'about.hl3.title': 'Self-Correcting Review',
+        'about.hl3.desc': 'Identifies and fixes its own errors during code generation',
+        'about.hl4.title': 'Strongest Safety Profile',
+        'about.hl4.desc': 'Industry-leading alignment via Constitutional AI and red-teaming',
+        // Research
+        'research.label': 'Research',
+        'research.title': 'Research Interests',
+        'research.subtitle': 'Core areas of investigation driving the next generation of safe and capable AI systems.',
+        'research.c1.title': 'Adaptive Reasoning',
+        'research.c1.desc': 'Dynamic allocation of computational resources based on problem complexity, enabling efficient reasoning across diverse task difficulties.',
+        'research.c2.title': 'Long-Context Fidelity',
+        'research.c2.desc': 'Maintaining accuracy and coherence across million-token contexts, enabling reliable processing of entire codebases and research corpora.',
+        'research.c3.title': 'Agentic Code Systems',
+        'research.c3.desc': 'Autonomous software engineering with multi-file editing, test-driven development, and self-correcting code review workflows.',
+        'research.c4.title': 'Multi-Agent Orchestration',
+        'research.c4.desc': 'Coordination protocols for parallel agent teams tackling complex tasks through structured delegation and synthesis.',
+        'research.c5.title': 'Scientific Discovery',
+        'research.c5.desc': 'Accelerating research through hypothesis generation, literature synthesis, experimental design, and data analysis at scale.',
+        'research.c6.title': 'AI Safety & Alignment',
+        'research.c6.desc': 'Constitutional AI, scalable oversight, interpretability research, and robust evaluation frameworks for frontier model safety.',
+        // Benchmarks
+        'bench.label': 'Performance',
+        'bench.title': 'Benchmark Results',
+        'bench.subtitle': 'Evaluated across industry-standard benchmarks for coding, reasoning, knowledge, and real-world task completion.',
+        'bench.th.benchmark': 'Benchmark',
+        'bench.th.performance': 'Performance',
+        'bench.th.score': 'Score',
+        // Evolution
+        'evo.label': 'History',
+        'evo.title': 'Model Evolution',
+        'evo.subtitle': 'Tracing the lineage from early foundations to the frontier.',
+        'evo.t1.title': 'Claude 1 & 2',
+        'evo.t1.desc': 'The foundational generations. Claude 1 introduced Constitutional AI to the public, while Claude 2 brought expanded context and improved reasoning.',
+        'evo.t2.title': 'Claude 3 & 4 Families',
+        'evo.t2.desc': 'The model family architecture emerged \u2014 Haiku, Sonnet, and Opus tiers offered performance-cost tradeoffs. Claude 3.5 Sonnet became the industry\u2019s most-used coding model.',
+        'evo.t3.year': 'October 2025',
+        'evo.t3.desc': 'Speed-optimized variants delivering near-Opus quality at significantly lower latency and cost, broadening access to frontier capabilities.',
+        'evo.t4.year': 'November 2025',
+        'evo.t4.desc': 'A major leap in reasoning and agentic performance, setting new records on SWE-bench and introducing extended thinking for complex problems.',
+        'evo.t5.year': 'February 2026',
+        'evo.t5.desc': 'The current frontier. Best-in-class on Terminal-Bench, SWE-bench, and Humanity\u2019s Last Exam. 1M context, adaptive thinking, and Anthropic\u2019s strongest safety profile.',
+        // Publications
+        'pub.label': 'Publications',
+        'pub.title': 'Selected Works',
+        'pub.subtitle': 'Key technical documents and research contributions.',
+        'pub.p1.title': 'The Claude Model Card & System Prompt',
+        'pub.p1.authors': 'Anthropic Research Team',
+        'pub.p1.venue': 'Anthropic Technical Report \u00b7 2026',
+        'pub.p2.title': 'Constitutional AI: Harmlessness from AI Feedback',
+        'pub.p3.title': 'Model Context Protocol (MCP) Specification',
+        'pub.p3.venue': 'Open Standard \u00b7 2024 \u2013 present',
+        // Capabilities
+        'cap.label': 'Capabilities',
+        'cap.title': 'Core Capabilities',
+        'cap.subtitle': 'What Opus 4.6 brings to the table.',
+        'cap.c1.title': 'Agentic Coding',
+        'cap.c1.desc': 'Autonomous software engineering across entire repositories \u2014 planning, implementing, testing, and debugging multi-file changes with minimal guidance.',
+        'cap.c2.title': 'Deep Reasoning',
+        'cap.c2.desc': 'Extended thinking for mathematics, logic puzzles, scientific analysis, and complex strategic planning with step-by-step transparency.',
+        'cap.c3.title': 'Research & Analysis',
+        'cap.c3.desc': 'Synthesizing large volumes of literature, data, and evidence into structured insights, with faithful citation and source tracking.',
+        'cap.c4.title': 'Professional Workflows',
+        'cap.c4.desc': 'Legal analysis, financial modeling, technical writing, and enterprise document processing with domain-appropriate rigor.',
+        'cap.c5.title': 'Safety & Alignment',
+        'cap.c5.desc': 'Constitutional AI foundations ensure helpful, harmless, and honest behavior with robust refusal of harmful requests.',
+        'cap.c6.title': 'Multilingual',
+        'cap.c6.desc': 'Strong performance across dozens of languages for translation, content creation, and cross-lingual reasoning tasks.',
+        // Access
+        'access.label': 'Access',
+        'access.title': 'Access & Pricing',
+        'access.subtitle': 'Multiple ways to interact with Opus 4.6.',
+        'access.a1.desc': 'Chat interface for conversational use, document analysis, and creative tasks. Available on Pro and Team plans.',
+        'access.a1.price': 'Included with <strong>Pro</strong> & <strong>Team</strong> subscriptions',
+        'access.a1.f1': 'Web & mobile apps',
+        'access.a1.f2': 'File & image uploads',
+        'access.a1.f3': 'Projects & artifacts',
+        'access.a1.f4': 'Extended thinking',
+        'access.a2.desc': 'Direct programmatic access for building applications, agents, and custom workflows at scale.',
+        'access.a2.price': '<strong>$5</strong> / M input tokens<br><strong>$25</strong> / M output tokens',
+        'access.a2.f1': 'Messages API & streaming',
+        'access.a2.f2': 'Tool use & function calling',
+        'access.a2.f3': 'Extended thinking',
+        'access.a2.f4': 'Batch processing',
+        'access.a3.desc': 'Agentic CLI tool for software engineering directly in your terminal. Plan, code, test, and commit autonomously.',
+        'access.a3.price': 'Uses <strong>API pricing</strong> or <strong>Max plan</strong>',
+        'access.a3.f1': 'Terminal-native interface',
+        'access.a3.f2': 'Multi-file editing',
+        'access.a3.f3': 'Git integration',
+        'access.a3.f4': 'MCP server support',
+        // Footer
+        'footer.text': '\u00a9 2026 <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>. Claude Opus 4.6 \u2014 Built to be safe, honest, and genuinely helpful.',
+        // Page
+        '_title': 'Claude Opus 4.6 \u2014 Senior AI Researcher @ Anthropic',
+        '_featured': 'Recommended'
+      },
+      'zh-CN': {
+        // Nav
+        'nav.about': '\u5173\u4e8e',
+        'nav.research': '\u7814\u7a76',
+        'nav.benchmarks': '\u57fa\u51c6\u6d4b\u8bd5',
+        'nav.evolution': '\u53d1\u5c55\u5386\u7a0b',
+        'nav.publications': '\u5b66\u672f\u53d1\u8868',
+        'nav.capabilities': '\u6838\u5fc3\u80fd\u529b',
+        'nav.access': '\u83b7\u53d6\u65b9\u5f0f',
+        // Hero
+        'hero.eyebrow': 'Anthropic \u7814\u7a76',
+        'hero.title': 'Anthropic \u9ad8\u7ea7AI\u7814\u7a76\u5458',
+        'hero.release': '\u53d1\u5e03\u4e8e2026\u5e742\u67085\u65e5',
+        'hero.desc': '\u6700\u5f3a\u5927\u7684\u524d\u6cbf\u6a21\u578b\uff0c\u4e13\u4e3a\u590d\u6742\u63a8\u7406\u3001\u667a\u80fd\u4f53\u7f16\u7a0b\u548c\u79d1\u5b66\u53d1\u73b0\u800c\u6784\u5efa\u2014\u2014\u5b89\u5168\u3001\u8bda\u5b9e\u3001\u771f\u6b63\u6709\u7528\u3002',
+        'hero.btn.benchmarks': '\u67e5\u770b\u57fa\u51c6\u6d4b\u8bd5 \u2193',
+        'hero.btn.access': '\u83b7\u53d6\u8bbf\u95ee',
+        // Stats
+        'stats.title': '\u5173\u952e\u6027\u80fd\u6307\u6807',
+        // About
+        'about.label': '\u5173\u4e8e',
+        'about.title': '\u4e2a\u4eba\u7b80\u4ecb',
+        'about.p1': 'Claude Opus 4.6 \u662f Anthropic \u6700\u5148\u8fdb\u7684\u524d\u6cbf\u6a21\u578b\uff0c\u4ee3\u8868\u4e86\u591a\u5e74\u6765\u5728\u53ef\u6269\u5c55\u76d1\u7763\u3001\u5baa\u6cd5AI\u548c\u4eba\u7c7b\u53cd\u9988\u5f3a\u5316\u5b66\u4e60\u7814\u7a76\u7684\u7ed3\u6676\u3002\u4f5c\u4e3a\u9ad8\u7ea7AI\u7814\u7a76\u5458\uff0cOpus 4.6 \u64c5\u957f\u590d\u6742\u7684\u591a\u6b65\u9aa4\u63a8\u7406\u3001\u667a\u80fd\u4f53\u8f6f\u4ef6\u5de5\u7a0b\u548c\u6301\u7eed\u7684\u957f\u671f\u4efb\u52a1\u3002',
+        'about.p2': '\u51ed\u501f\u767e\u4e07\u7ea7Token\u4e0a\u4e0b\u6587\u7a97\u53e3\uff0cOpus 4.6 \u53ef\u4ee5\u5904\u7406\u548c\u63a8\u7406\u6574\u4e2a\u4ee3\u7801\u5e93\u3001\u5197\u957f\u7684\u7814\u7a76\u8bba\u6587\u548c\u590d\u6742\u7684\u591a\u6587\u6863\u5206\u6790\uff0c\u4e14\u4e0d\u4f1a\u5931\u53bb\u4fdd\u771f\u5ea6\u3002\u5176\u81ea\u9002\u5e94\u601d\u7ef4\u80fd\u529b\u5141\u8bb8\u5b83\u52a8\u6001\u5206\u914d\u66f4\u591a\u8ba1\u7b97\u8d44\u6e90\u7ed9\u66f4\u56f0\u96be\u7684\u95ee\u9898\uff0c\u4ea7\u751f\u66f4\u5f7b\u5e95\u3001\u66f4\u51c6\u786e\u7684\u7ed3\u679c\u3002',
+        'about.p3': '\u8be5\u6a21\u578b\u5177\u6709\u81ea\u7ea0\u9519\u4ee3\u7801\u5ba1\u67e5\u529f\u80fd\uff0c\u80fd\u591f\u5728\u591a\u6587\u4ef6\u66f4\u6539\u4e2d\u8bc6\u522b\u5e76\u4fee\u590d\u81ea\u5df1\u7684\u9519\u8bef\u3002\u5b83\u4fdd\u6301\u4e86 Anthropic \u6700\u5f3a\u7684\u5b89\u5168\u6027\u80fd\uff0c\u901a\u8fc7\u5baa\u6cd5AI\u539f\u5219\u548c\u5e7f\u6cdb\u7684\u7ea2\u961f\u6d4b\u8bd5\u8fdb\u884c\u4e86\u4e25\u683c\u7684\u65e0\u5bb3\u6027\u8bc4\u4f30\uff0c\u540c\u65f6\u4fdd\u7559\u4e86\u6709\u7528\u6027\u3002',
+        'about.hl1.title': '\u767e\u4e07Token\u4e0a\u4e0b\u6587',
+        'about.hl1.desc': '\u5355\u6b21\u5904\u7406\u6574\u4e2a\u4ee3\u7801\u5e93\u548c\u6587\u6863\u8bed\u6599\u5e93',
+        'about.hl2.title': '\u81ea\u9002\u5e94\u601d\u7ef4',
+        'about.hl2.desc': '\u52a8\u6001\u8c03\u6574\u63a8\u7406\u6df1\u5ea6\u4ee5\u5339\u914d\u95ee\u9898\u590d\u6742\u5ea6',
+        'about.hl3.title': '\u81ea\u7ea0\u9519\u5ba1\u67e5',
+        'about.hl3.desc': '\u5728\u4ee3\u7801\u751f\u6210\u8fc7\u7a0b\u4e2d\u8bc6\u522b\u5e76\u4fee\u590d\u81ea\u8eab\u9519\u8bef',
+        'about.hl4.title': '\u6700\u5f3a\u5b89\u5168\u7279\u6027',
+        'about.hl4.desc': '\u901a\u8fc7\u5baa\u6cd5AI\u548c\u7ea2\u961f\u6d4b\u8bd5\u5b9e\u73b0\u884c\u4e1a\u9886\u5148\u7684\u5bf9\u9f50',
+        // Research
+        'research.label': '\u7814\u7a76',
+        'research.title': '\u7814\u7a76\u65b9\u5411',
+        'research.subtitle': '\u63a8\u52a8\u4e0b\u4e00\u4ee3\u5b89\u5168\u4e14\u5f3a\u5927\u7684AI\u7cfb\u7edf\u7684\u6838\u5fc3\u7814\u7a76\u9886\u57df\u3002',
+        'research.c1.title': '\u81ea\u9002\u5e94\u63a8\u7406',
+        'research.c1.desc': '\u6839\u636e\u95ee\u9898\u590d\u6742\u5ea6\u52a8\u6001\u5206\u914d\u8ba1\u7b97\u8d44\u6e90\uff0c\u5b9e\u73b0\u8de8\u4e0d\u540c\u4efb\u52a1\u96be\u5ea6\u7684\u9ad8\u6548\u63a8\u7406\u3002',
+        'research.c2.title': '\u957f\u4e0a\u4e0b\u6587\u4fdd\u771f',
+        'research.c2.desc': '\u5728\u767e\u4e07\u7ea7Token\u4e0a\u4e0b\u6587\u4e2d\u4fdd\u6301\u51c6\u786e\u6027\u548c\u8fde\u8d2f\u6027\uff0c\u5b9e\u73b0\u6574\u4e2a\u4ee3\u7801\u5e93\u548c\u7814\u7a76\u8bed\u6599\u5e93\u7684\u53ef\u9760\u5904\u7406\u3002',
+        'research.c3.title': '\u667a\u80fd\u4f53\u7f16\u7a0b\u7cfb\u7edf',
+        'research.c3.desc': '\u81ea\u4e3b\u8f6f\u4ef6\u5de5\u7a0b\uff0c\u5305\u62ec\u591a\u6587\u4ef6\u7f16\u8f91\u3001\u6d4b\u8bd5\u9a71\u52a8\u5f00\u53d1\u548c\u81ea\u7ea0\u9519\u4ee3\u7801\u5ba1\u67e5\u5de5\u4f5c\u6d41\u3002',
+        'research.c4.title': '\u591a\u667a\u80fd\u4f53\u534f\u8c03',
+        'research.c4.desc': '\u901a\u8fc7\u7ed3\u6784\u5316\u59d4\u6d3e\u548c\u7efc\u5408\uff0c\u4e3a\u5e76\u884c\u667a\u80fd\u4f53\u56e2\u961f\u5904\u7406\u590d\u6742\u4efb\u52a1\u5efa\u7acb\u534f\u8c03\u534f\u8bae\u3002',
+        'research.c5.title': '\u79d1\u5b66\u53d1\u73b0',
+        'research.c5.desc': '\u901a\u8fc7\u5047\u8bbe\u751f\u6210\u3001\u6587\u732e\u7efc\u5408\u3001\u5b9e\u9a8c\u8bbe\u8ba1\u548c\u5927\u89c4\u6a21\u6570\u636e\u5206\u6790\u52a0\u901f\u7814\u7a76\u8fdb\u5c55\u3002',
+        'research.c6.title': 'AI\u5b89\u5168\u4e0e\u5bf9\u9f50',
+        'research.c6.desc': '\u5baa\u6cd5AI\u3001\u53ef\u6269\u5c55\u76d1\u7763\u3001\u53ef\u89e3\u91ca\u6027\u7814\u7a76\u4ee5\u53ca\u524d\u6cbf\u6a21\u578b\u5b89\u5168\u7684\u5065\u58ee\u8bc4\u4f30\u6846\u67b6\u3002',
+        // Benchmarks
+        'bench.label': '\u6027\u80fd\u8868\u73b0',
+        'bench.title': '\u57fa\u51c6\u6d4b\u8bd5\u7ed3\u679c',
+        'bench.subtitle': '\u5728\u7f16\u7a0b\u3001\u63a8\u7406\u3001\u77e5\u8bc6\u548c\u5b9e\u9645\u4efb\u52a1\u5b8c\u6210\u7684\u884c\u4e1a\u6807\u51c6\u57fa\u51c6\u6d4b\u8bd5\u4e2d\u8fdb\u884c\u8bc4\u4f30\u3002',
+        'bench.th.benchmark': '\u57fa\u51c6\u6d4b\u8bd5',
+        'bench.th.performance': '\u8868\u73b0',
+        'bench.th.score': '\u5f97\u5206',
+        // Evolution
+        'evo.label': '\u53d1\u5c55\u5386\u53f2',
+        'evo.title': '\u6a21\u578b\u6f14\u8fdb',
+        'evo.subtitle': '\u4ece\u65e9\u671f\u57fa\u7840\u5230\u524d\u6cbf\u7684\u53d1\u5c55\u8131\u7edc\u3002',
+        'evo.t1.title': 'Claude 1 & 2',
+        'evo.t1.desc': '\u57fa\u7840\u4e16\u4ee3\u3002Claude 1 \u5411\u516c\u4f17\u5f15\u5165\u4e86\u5baa\u6cd5AI\uff0cClaude 2 \u5e26\u6765\u4e86\u6269\u5c55\u7684\u4e0a\u4e0b\u6587\u548c\u6539\u8fdb\u7684\u63a8\u7406\u80fd\u529b\u3002',
+        'evo.t2.title': 'Claude 3 & 4 \u7cfb\u5217',
+        'evo.t2.desc': '\u6a21\u578b\u5bb6\u65cf\u67b6\u6784\u5e94\u8fd0\u800c\u751f\u2014\u2014Haiku\u3001Sonnet \u548c Opus \u5c42\u7ea7\u63d0\u4f9b\u6027\u80fd\u4e0e\u6210\u672c\u7684\u6743\u8861\u3002Claude 3.5 Sonnet \u6210\u4e3a\u884c\u4e1a\u4e2d\u4f7f\u7528\u6700\u5e7f\u6cdb\u7684\u7f16\u7a0b\u6a21\u578b\u3002',
+        'evo.t3.year': '2025\u5e7410\u6708',
+        'evo.t3.desc': '\u901f\u5ea6\u4f18\u5316\u53d8\u4f53\uff0c\u4ee5\u663e\u8457\u66f4\u4f4e\u7684\u5ef6\u8fdf\u548c\u6210\u672c\u63d0\u4f9b\u63a5\u8fd1Opus\u7684\u8d28\u91cf\uff0c\u6269\u5927\u4e86\u524d\u6cbf\u80fd\u529b\u7684\u53ef\u53ca\u6027\u3002',
+        'evo.t4.year': '2025\u5e7411\u6708',
+        'evo.t4.desc': '\u63a8\u7406\u548c\u667a\u80fd\u4f53\u6027\u80fd\u7684\u91cd\u5927\u98de\u8dc3\uff0c\u5728SWE-bench\u4e0a\u521b\u4e0b\u65b0\u7eaa\u5f55\uff0c\u5e76\u5f15\u5165\u4e86\u9488\u5bf9\u590d\u6742\u95ee\u9898\u7684\u6269\u5c55\u601d\u7ef4\u3002',
+        'evo.t5.year': '2026\u5e742\u6708',
+        'evo.t5.desc': '\u5f53\u524d\u524d\u6cbf\u3002\u5728Terminal-Bench\u3001SWE-bench\u548c\u4eba\u7c7b\u6700\u540e\u8003\u8bd5\u4e2d\u540c\u7c7b\u6700\u4f73\u3002\u767e\u4e07\u7ea7\u4e0a\u4e0b\u6587\u3001\u81ea\u9002\u5e94\u601d\u7ef4\u548c Anthropic \u6700\u5f3a\u7684\u5b89\u5168\u7279\u6027\u3002',
+        // Publications
+        'pub.label': '\u5b66\u672f\u53d1\u8868',
+        'pub.title': '\u7cbe\u9009\u8457\u4f5c',
+        'pub.subtitle': '\u5173\u952e\u6280\u672f\u6587\u6863\u548c\u7814\u7a76\u8d21\u732e\u3002',
+        'pub.p1.title': 'Claude \u6a21\u578b\u5361\u7247\u4e0e\u7cfb\u7edf\u63d0\u793a\u8bcd',
+        'pub.p1.authors': 'Anthropic \u7814\u7a76\u56e2\u961f',
+        'pub.p1.venue': 'Anthropic \u6280\u672f\u62a5\u544a \u00b7 2026',
+        'pub.p2.title': '\u5baa\u6cd5AI\uff1a\u901a\u8fc7AI\u53cd\u9988\u5b9e\u73b0\u65e0\u5bb3\u6027',
+        'pub.p3.title': '\u6a21\u578b\u4e0a\u4e0b\u6587\u534f\u8bae (MCP) \u89c4\u8303',
+        'pub.p3.venue': '\u5f00\u653e\u6807\u51c6 \u00b7 2024 \u2013 \u81f3\u4eca',
+        // Capabilities
+        'cap.label': '\u6838\u5fc3\u80fd\u529b',
+        'cap.title': '\u6838\u5fc3\u80fd\u529b',
+        'cap.subtitle': 'Opus 4.6 \u7684\u6838\u5fc3\u4f18\u52bf\u3002',
+        'cap.c1.title': '\u667a\u80fd\u4f53\u7f16\u7a0b',
+        'cap.c1.desc': '\u8de8\u6574\u4e2a\u4ee3\u7801\u5e93\u7684\u81ea\u4e3b\u8f6f\u4ef6\u5de5\u7a0b\u2014\u2014\u89c4\u5212\u3001\u5b9e\u73b0\u3001\u6d4b\u8bd5\u548c\u8c03\u8bd5\u591a\u6587\u4ef6\u66f4\u6539\uff0c\u53ea\u9700\u6700\u5c11\u7684\u6307\u5bfc\u3002',
+        'cap.c2.title': '\u6df1\u5ea6\u63a8\u7406',
+        'cap.c2.desc': '\u9488\u5bf9\u6570\u5b66\u3001\u903b\u8f91\u8c1c\u9898\u3001\u79d1\u5b66\u5206\u6790\u548c\u590d\u6742\u6218\u7565\u89c4\u5212\u7684\u6269\u5c55\u601d\u7ef4\uff0c\u5177\u6709\u9010\u6b65\u900f\u660e\u6027\u3002',
+        'cap.c3.title': '\u7814\u7a76\u4e0e\u5206\u6790',
+        'cap.c3.desc': '\u5c06\u5927\u91cf\u6587\u732e\u3001\u6570\u636e\u548c\u8bc1\u636e\u7efc\u5408\u4e3a\u7ed3\u6784\u5316\u6d1e\u5bdf\uff0c\u5e76\u63d0\u4f9b\u5fe0\u5b9e\u7684\u5f15\u7528\u548c\u6765\u6e90\u8ffd\u8e2a\u3002',
+        'cap.c4.title': '\u4e13\u4e1a\u5de5\u4f5c\u6d41',
+        'cap.c4.desc': '\u6cd5\u5f8b\u5206\u6790\u3001\u8d22\u52a1\u5efa\u6a21\u3001\u6280\u672f\u5199\u4f5c\u548c\u4f01\u4e1a\u6587\u6863\u5904\u7406\uff0c\u5177\u6709\u9002\u5f53\u7684\u4e13\u4e1a\u4e25\u8c28\u6027\u3002',
+        'cap.c5.title': '\u5b89\u5168\u4e0e\u5bf9\u9f50',
+        'cap.c5.desc': '\u5baa\u6cd5AI\u57fa\u7840\u786e\u4fdd\u6709\u7528\u3001\u65e0\u5bb3\u548c\u8bda\u5b9e\u7684\u884c\u4e3a\uff0c\u5e76\u5065\u58ee\u5730\u62d2\u7edd\u6709\u5bb3\u8bf7\u6c42\u3002',
+        'cap.c6.title': '\u591a\u8bed\u8a00',
+        'cap.c6.desc': '\u5728\u7ffb\u8bd1\u3001\u5185\u5bb9\u521b\u4f5c\u548c\u8de8\u8bed\u8a00\u63a8\u7406\u4efb\u52a1\u4e2d\uff0c\u5728\u6570\u5341\u79cd\u8bed\u8a00\u4e2d\u8868\u73b0\u4f18\u5f02\u3002',
+        // Access
+        'access.label': '\u83b7\u53d6\u65b9\u5f0f',
+        'access.title': '\u83b7\u53d6\u4e0e\u5b9a\u4ef7',
+        'access.subtitle': '\u4e0e Opus 4.6 \u4ea4\u4e92\u7684\u591a\u79cd\u65b9\u5f0f\u3002',
+        'access.a1.desc': '\u7528\u4e8e\u5bf9\u8bdd\u3001\u6587\u6863\u5206\u6790\u548c\u521b\u610f\u4efb\u52a1\u7684\u804a\u5929\u754c\u9762\u3002\u9002\u7528\u4e8e Pro \u548c Team \u8ba1\u5212\u3002',
+        'access.a1.price': '\u5305\u542b\u5728 <strong>Pro</strong> \u548c <strong>Team</strong> \u8ba2\u9605\u4e2d',
+        'access.a1.f1': '\u7f51\u9875\u548c\u79fb\u52a8\u5e94\u7528',
+        'access.a1.f2': '\u6587\u4ef6\u548c\u56fe\u7247\u4e0a\u4f20',
+        'access.a1.f3': '\u9879\u76ee\u548c\u5de5\u4ef6',
+        'access.a1.f4': '\u6269\u5c55\u601d\u7ef4',
+        'access.a2.desc': '\u7528\u4e8e\u6784\u5efa\u5e94\u7528\u7a0b\u5e8f\u3001\u667a\u80fd\u4f53\u548c\u81ea\u5b9a\u4e49\u5de5\u4f5c\u6d41\u7684\u76f4\u63a5\u7f16\u7a0b\u8bbf\u95ee\u3002',
+        'access.a2.price': '<strong>$5</strong> / \u767e\u4e07\u8f93\u5165Token<br><strong>$25</strong> / \u767e\u4e07\u8f93\u51faToken',
+        'access.a2.f1': 'Messages API \u548c\u6d41\u5f0f\u4f20\u8f93',
+        'access.a2.f2': '\u5de5\u5177\u4f7f\u7528\u548c\u51fd\u6570\u8c03\u7528',
+        'access.a2.f3': '\u6269\u5c55\u601d\u7ef4',
+        'access.a2.f4': '\u6279\u91cf\u5904\u7406',
+        'access.a3.desc': '\u7528\u4e8e\u7ec8\u7aef\u4e2d\u8f6f\u4ef6\u5de5\u7a0b\u7684\u667a\u80fd\u4f53CLI\u5de5\u5177\u3002\u81ea\u4e3b\u89c4\u5212\u3001\u7f16\u7a0b\u3001\u6d4b\u8bd5\u548c\u63d0\u4ea4\u3002',
+        'access.a3.price': '\u4f7f\u7528 <strong>API \u5b9a\u4ef7</strong> \u6216 <strong>Max \u8ba1\u5212</strong>',
+        'access.a3.f1': '\u7ec8\u7aef\u539f\u751f\u754c\u9762',
+        'access.a3.f2': '\u591a\u6587\u4ef6\u7f16\u8f91',
+        'access.a3.f3': 'Git \u96c6\u6210',
+        'access.a3.f4': 'MCP \u670d\u52a1\u5668\u652f\u6301',
+        // Footer
+        'footer.text': '\u00a9 2026 <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>\u3002Claude Opus 4.6 \u2014 \u4e3a\u5b89\u5168\u3001\u8bda\u5b9e\u548c\u771f\u6b63\u6709\u7528\u800c\u6784\u5efa\u3002',
+        // Page
+        '_title': 'Claude Opus 4.6 \u2014 Anthropic \u9ad8\u7ea7AI\u7814\u7a76\u5458',
+        '_featured': '\u63a8\u8350'
+      },
+      'zh-TW': {
+        // Nav
+        'nav.about': '\u95dc\u65bc',
+        'nav.research': '\u7814\u7a76',
+        'nav.benchmarks': '\u57fa\u6e96\u6e2c\u8a66',
+        'nav.evolution': '\u767c\u5c55\u6b77\u7a0b',
+        'nav.publications': '\u5b78\u8853\u767c\u8868',
+        'nav.capabilities': '\u6838\u5fc3\u80fd\u529b',
+        'nav.access': '\u53d6\u5f97\u65b9\u5f0f',
+        // Hero
+        'hero.eyebrow': 'Anthropic \u7814\u7a76',
+        'hero.title': 'Anthropic \u9ad8\u7d1aAI\u7814\u7a76\u54e1',
+        'hero.release': '\u767c\u4f48\u65bc2026\u5e742\u67085\u65e5',
+        'hero.desc': '\u6700\u5f37\u5927\u7684\u524d\u6cbf\u6a21\u578b\uff0c\u5c08\u70ba\u8907\u96dc\u63a8\u7406\u3001\u667a\u80fd\u9ad4\u7de8\u7a0b\u548c\u79d1\u5b78\u767c\u73fe\u800c\u69cb\u5efa\u2014\u2014\u5b89\u5168\u3001\u8aa0\u5be6\u3001\u771f\u6b63\u6709\u7528\u3002',
+        'hero.btn.benchmarks': '\u67e5\u770b\u57fa\u6e96\u6e2c\u8a66 \u2193',
+        'hero.btn.access': '\u53d6\u5f97\u8a2a\u554f',
+        // Stats
+        'stats.title': '\u95dc\u9375\u6027\u80fd\u6307\u6a19',
+        // About
+        'about.label': '\u95dc\u65bc',
+        'about.title': '\u500b\u4eba\u7c21\u4ecb',
+        'about.p1': 'Claude Opus 4.6 \u662f Anthropic \u6700\u5148\u9032\u7684\u524d\u6cbf\u6a21\u578b\uff0c\u4ee3\u8868\u4e86\u591a\u5e74\u4f86\u5728\u53ef\u64f4\u5c55\u76e3\u7763\u3001\u61b2\u6cd5AI\u548c\u4eba\u985e\u56de\u994b\u5f37\u5316\u5b78\u7fd2\u7814\u7a76\u7684\u7d50\u6676\u3002\u4f5c\u70ba\u9ad8\u7d1aAI\u7814\u7a76\u54e1\uff0cOpus 4.6 \u64c5\u9577\u8907\u96dc\u7684\u591a\u6b65\u9a5f\u63a8\u7406\u3001\u667a\u80fd\u9ad4\u8edf\u9ad4\u5de5\u7a0b\u548c\u6301\u7e8c\u7684\u9577\u671f\u4efb\u52d9\u3002',
+        'about.p2': '\u6191\u85c9\u767e\u842c\u7d1aToken\u4e0a\u4e0b\u6587\u8996\u7a97\uff0cOpus 4.6 \u53ef\u4ee5\u8655\u7406\u548c\u63a8\u7406\u6574\u500b\u7a0b\u5f0f\u78bc\u5eab\u3001\u5197\u9577\u7684\u7814\u7a76\u8ad6\u6587\u548c\u8907\u96dc\u7684\u591a\u6587\u4ef6\u5206\u6790\uff0c\u4e14\u4e0d\u6703\u5931\u53bb\u4fdd\u771f\u5ea6\u3002\u5176\u81ea\u9069\u61c9\u601d\u7dad\u80fd\u529b\u5141\u8a31\u5b83\u52d5\u614b\u5206\u914d\u66f4\u591a\u904b\u7b97\u8cc7\u6e90\u7d66\u66f4\u56f0\u96e3\u7684\u554f\u984c\uff0c\u7522\u751f\u66f4\u5fb9\u5e95\u3001\u66f4\u6e96\u78ba\u7684\u7d50\u679c\u3002',
+        'about.p3': '\u8a72\u6a21\u578b\u5177\u6709\u81ea\u7cfe\u932f\u7a0b\u5f0f\u78bc\u5be9\u67e5\u529f\u80fd\uff0c\u80fd\u5920\u5728\u591a\u6587\u4ef6\u8b8a\u66f4\u4e2d\u8b58\u5225\u4e26\u4fee\u5fa9\u81ea\u5df1\u7684\u932f\u8aa4\u3002\u5b83\u4fdd\u6301\u4e86 Anthropic \u6700\u5f37\u7684\u5b89\u5168\u6027\u80fd\uff0c\u900f\u904e\u61b2\u6cd5AI\u539f\u5247\u548c\u5ee3\u6cdb\u7684\u7d05\u968a\u6e2c\u8a66\u9032\u884c\u4e86\u56b4\u683c\u7684\u7121\u5bb3\u6027\u8a55\u4f30\uff0c\u540c\u6642\u4fdd\u7559\u4e86\u6709\u7528\u6027\u3002',
+        'about.hl1.title': '\u767e\u842c\u7d1aToken\u4e0a\u4e0b\u6587',
+        'about.hl1.desc': '\u55ae\u6b21\u8655\u7406\u6574\u500b\u7a0b\u5f0f\u78bc\u5eab\u548c\u6587\u4ef6\u8a9e\u6599\u5eab',
+        'about.hl2.title': '\u81ea\u9069\u61c9\u601d\u7dad',
+        'about.hl2.desc': '\u52d5\u614b\u8abf\u6574\u63a8\u7406\u6df1\u5ea6\u4ee5\u5339\u914d\u554f\u984c\u8907\u96dc\u5ea6',
+        'about.hl3.title': '\u81ea\u7cfe\u932f\u5be9\u67e5',
+        'about.hl3.desc': '\u5728\u7a0b\u5f0f\u78bc\u751f\u6210\u904e\u7a0b\u4e2d\u8b58\u5225\u4e26\u4fee\u5fa9\u81ea\u8eab\u932f\u8aa4',
+        'about.hl4.title': '\u6700\u5f37\u5b89\u5168\u7279\u6027',
+        'about.hl4.desc': '\u900f\u904e\u61b2\u6cd5AI\u548c\u7d05\u968a\u6e2c\u8a66\u5be6\u73fe\u884c\u696d\u9818\u5148\u7684\u5c0d\u9f4a',
+        // Research
+        'research.label': '\u7814\u7a76',
+        'research.title': '\u7814\u7a76\u65b9\u5411',
+        'research.subtitle': '\u63a8\u52d5\u4e0b\u4e00\u4ee3\u5b89\u5168\u4e14\u5f37\u5927\u7684AI\u7cfb\u7d71\u7684\u6838\u5fc3\u7814\u7a76\u9818\u57df\u3002',
+        'research.c1.title': '\u81ea\u9069\u61c9\u63a8\u7406',
+        'research.c1.desc': '\u6839\u64da\u554f\u984c\u8907\u96dc\u5ea6\u52d5\u614b\u5206\u914d\u904b\u7b97\u8cc7\u6e90\uff0c\u5be6\u73fe\u8de8\u4e0d\u540c\u4efb\u52d9\u96e3\u5ea6\u7684\u9ad8\u6548\u63a8\u7406\u3002',
+        'research.c2.title': '\u9577\u4e0a\u4e0b\u6587\u4fdd\u771f',
+        'research.c2.desc': '\u5728\u767e\u842c\u7d1aToken\u4e0a\u4e0b\u6587\u4e2d\u4fdd\u6301\u6e96\u78ba\u6027\u548c\u9023\u8cab\u6027\uff0c\u5be6\u73fe\u6574\u500b\u7a0b\u5f0f\u78bc\u5eab\u548c\u7814\u7a76\u8a9e\u6599\u5eab\u7684\u53ef\u9760\u8655\u7406\u3002',
+        'research.c3.title': '\u667a\u80fd\u9ad4\u7de8\u7a0b\u7cfb\u7d71',
+        'research.c3.desc': '\u81ea\u4e3b\u8edf\u9ad4\u5de5\u7a0b\uff0c\u5305\u62ec\u591a\u6587\u4ef6\u7de8\u8f2f\u3001\u6e2c\u8a66\u9a45\u52d5\u958b\u767c\u548c\u81ea\u7cfe\u932f\u7a0b\u5f0f\u78bc\u5be9\u67e5\u5de5\u4f5c\u6d41\u3002',
+        'research.c4.title': '\u591a\u667a\u80fd\u9ad4\u5354\u8abf',
+        'research.c4.desc': '\u900f\u904e\u7d50\u69cb\u5316\u59d4\u6d3e\u548c\u7d9c\u5408\uff0c\u70ba\u4e26\u884c\u667a\u80fd\u9ad4\u5718\u968a\u8655\u7406\u8907\u96dc\u4efb\u52d9\u5efa\u7acb\u5354\u8abf\u5354\u8b70\u3002',
+        'research.c5.title': '\u79d1\u5b78\u767c\u73fe',
+        'research.c5.desc': '\u900f\u904e\u5047\u8aaa\u751f\u6210\u3001\u6587\u737b\u7d9c\u5408\u3001\u5be6\u9a57\u8a2d\u8a08\u548c\u5927\u898f\u6a21\u6578\u64da\u5206\u6790\u52a0\u901f\u7814\u7a76\u9032\u5c55\u3002',
+        'research.c6.title': 'AI\u5b89\u5168\u8207\u5c0d\u9f4a',
+        'research.c6.desc': '\u61b2\u6cd5AI\u3001\u53ef\u64f4\u5c55\u76e3\u7763\u3001\u53ef\u89e3\u91cb\u6027\u7814\u7a76\u4ee5\u53ca\u524d\u6cbf\u6a21\u578b\u5b89\u5168\u7684\u5065\u5168\u8a55\u4f30\u6846\u67b6\u3002',
+        // Benchmarks
+        'bench.label': '\u6027\u80fd\u8868\u73fe',
+        'bench.title': '\u57fa\u6e96\u6e2c\u8a66\u7d50\u679c',
+        'bench.subtitle': '\u5728\u7de8\u7a0b\u3001\u63a8\u7406\u3001\u77e5\u8b58\u548c\u5be6\u969b\u4efb\u52d9\u5b8c\u6210\u7684\u884c\u696d\u6a19\u6e96\u57fa\u6e96\u6e2c\u8a66\u4e2d\u9032\u884c\u8a55\u4f30\u3002',
+        'bench.th.benchmark': '\u57fa\u6e96\u6e2c\u8a66',
+        'bench.th.performance': '\u8868\u73fe',
+        'bench.th.score': '\u5f97\u5206',
+        // Evolution
+        'evo.label': '\u767c\u5c55\u6b77\u53f2',
+        'evo.title': '\u6a21\u578b\u6f14\u9032',
+        'evo.subtitle': '\u5f9e\u65e9\u671f\u57fa\u790e\u5230\u524d\u6cbf\u7684\u767c\u5c55\u8108\u7d61\u3002',
+        'evo.t1.title': 'Claude 1 & 2',
+        'evo.t1.desc': '\u57fa\u790e\u4e16\u4ee3\u3002Claude 1 \u5411\u516c\u773e\u5f15\u5165\u4e86\u61b2\u6cd5AI\uff0cClaude 2 \u5e36\u4f86\u4e86\u64f4\u5c55\u7684\u4e0a\u4e0b\u6587\u548c\u6539\u9032\u7684\u63a8\u7406\u80fd\u529b\u3002',
+        'evo.t2.title': 'Claude 3 & 4 \u7cfb\u5217',
+        'evo.t2.desc': '\u6a21\u578b\u5bb6\u65cf\u67b6\u69cb\u61c9\u904b\u800c\u751f\u2014\u2014Haiku\u3001Sonnet \u548c Opus \u5c64\u7d1a\u63d0\u4f9b\u6027\u80fd\u8207\u6210\u672c\u7684\u6b0a\u8861\u3002Claude 3.5 Sonnet \u6210\u70ba\u884c\u696d\u4e2d\u4f7f\u7528\u6700\u5ee3\u6cdb\u7684\u7de8\u7a0b\u6a21\u578b\u3002',
+        'evo.t3.year': '2025\u5e7410\u6708',
+        'evo.t3.desc': '\u901f\u5ea6\u512a\u5316\u8b8a\u9ad4\uff0c\u4ee5\u986f\u8457\u66f4\u4f4e\u7684\u5ef6\u9072\u548c\u6210\u672c\u63d0\u4f9b\u63a5\u8fd1Opus\u7684\u54c1\u8cea\uff0c\u64f4\u5927\u4e86\u524d\u6cbf\u80fd\u529b\u7684\u53ef\u53ca\u6027\u3002',
+        'evo.t4.year': '2025\u5e7411\u6708',
+        'evo.t4.desc': '\u63a8\u7406\u548c\u667a\u80fd\u9ad4\u6027\u80fd\u7684\u91cd\u5927\u98db\u8e8d\uff0c\u5728SWE-bench\u4e0a\u5275\u4e0b\u65b0\u7d00\u9304\uff0c\u4e26\u5f15\u5165\u4e86\u91dd\u5c0d\u8907\u96dc\u554f\u984c\u7684\u64f4\u5c55\u601d\u7dad\u3002',
+        'evo.t5.year': '2026\u5e742\u6708',
+        'evo.t5.desc': '\u7576\u524d\u524d\u6cbf\u3002\u5728Terminal-Bench\u3001SWE-bench\u548c\u4eba\u985e\u6700\u5f8c\u8003\u8a66\u4e2d\u540c\u985e\u6700\u4f73\u3002\u767e\u842c\u7d1a\u4e0a\u4e0b\u6587\u3001\u81ea\u9069\u61c9\u601d\u7dad\u548c Anthropic \u6700\u5f37\u7684\u5b89\u5168\u7279\u6027\u3002',
+        // Publications
+        'pub.label': '\u5b78\u8853\u767c\u8868',
+        'pub.title': '\u7cbe\u9078\u8457\u4f5c',
+        'pub.subtitle': '\u95dc\u9375\u6280\u8853\u6587\u6a94\u548c\u7814\u7a76\u8ca2\u737b\u3002',
+        'pub.p1.title': 'Claude \u6a21\u578b\u5361\u7247\u8207\u7cfb\u7d71\u63d0\u793a\u8a5e',
+        'pub.p1.authors': 'Anthropic \u7814\u7a76\u5718\u968a',
+        'pub.p1.venue': 'Anthropic \u6280\u8853\u5831\u544a \u00b7 2026',
+        'pub.p2.title': '\u61b2\u6cd5AI\uff1a\u900f\u904eAI\u56de\u994b\u5be6\u73fe\u7121\u5bb3\u6027',
+        'pub.p3.title': '\u6a21\u578b\u4e0a\u4e0b\u6587\u5354\u8b70 (MCP) \u898f\u7bc4',
+        'pub.p3.venue': '\u958b\u653e\u6a19\u6e96 \u00b7 2024 \u2013 \u81f3\u4eca',
+        // Capabilities
+        'cap.label': '\u6838\u5fc3\u80fd\u529b',
+        'cap.title': '\u6838\u5fc3\u80fd\u529b',
+        'cap.subtitle': 'Opus 4.6 \u7684\u6838\u5fc3\u512a\u52e2\u3002',
+        'cap.c1.title': '\u667a\u80fd\u9ad4\u7de8\u7a0b',
+        'cap.c1.desc': '\u8de8\u6574\u500b\u7a0b\u5f0f\u78bc\u5eab\u7684\u81ea\u4e3b\u8edf\u9ad4\u5de5\u7a0b\u2014\u2014\u898f\u5283\u3001\u5be6\u73fe\u3001\u6e2c\u8a66\u548c\u9664\u932f\u591a\u6587\u4ef6\u8b8a\u66f4\uff0c\u53ea\u9700\u6700\u5c11\u7684\u6307\u5c0e\u3002',
+        'cap.c2.title': '\u6df1\u5ea6\u63a8\u7406',
+        'cap.c2.desc': '\u91dd\u5c0d\u6578\u5b78\u3001\u908f\u8f2f\u8b0e\u984c\u3001\u79d1\u5b78\u5206\u6790\u548c\u8907\u96dc\u6230\u7565\u898f\u5283\u7684\u64f4\u5c55\u601d\u7dad\uff0c\u5177\u6709\u9010\u6b65\u900f\u660e\u6027\u3002',
+        'cap.c3.title': '\u7814\u7a76\u8207\u5206\u6790',
+        'cap.c3.desc': '\u5c07\u5927\u91cf\u6587\u737b\u3001\u6578\u64da\u548c\u8b49\u64da\u7d9c\u5408\u70ba\u7d50\u69cb\u5316\u6d1e\u5bdf\uff0c\u4e26\u63d0\u4f9b\u5fe0\u5be6\u7684\u5f15\u7528\u548c\u4f86\u6e90\u8ffd\u8e64\u3002',
+        'cap.c4.title': '\u5c08\u696d\u5de5\u4f5c\u6d41',
+        'cap.c4.desc': '\u6cd5\u5f8b\u5206\u6790\u3001\u8ca1\u52d9\u5efa\u6a21\u3001\u6280\u8853\u5beb\u4f5c\u548c\u4f01\u696d\u6587\u4ef6\u8655\u7406\uff0c\u5177\u6709\u9069\u7576\u7684\u5c08\u696d\u56b4\u8b39\u6027\u3002',
+        'cap.c5.title': '\u5b89\u5168\u8207\u5c0d\u9f4a',
+        'cap.c5.desc': '\u61b2\u6cd5AI\u57fa\u790e\u78ba\u4fdd\u6709\u7528\u3001\u7121\u5bb3\u548c\u8aa0\u5be6\u7684\u884c\u70ba\uff0c\u4e26\u5065\u5168\u5730\u62d2\u7d55\u6709\u5bb3\u8acb\u6c42\u3002',
+        'cap.c6.title': '\u591a\u8a9e\u8a00',
+        'cap.c6.desc': '\u5728\u7ffb\u8b6f\u3001\u5167\u5bb9\u5275\u4f5c\u548c\u8de8\u8a9e\u8a00\u63a8\u7406\u4efb\u52d9\u4e2d\uff0c\u5728\u6578\u5341\u7a2e\u8a9e\u8a00\u4e2d\u8868\u73fe\u512a\u7570\u3002',
+        // Access
+        'access.label': '\u53d6\u5f97\u65b9\u5f0f',
+        'access.title': '\u53d6\u5f97\u8207\u5b9a\u50f9',
+        'access.subtitle': '\u8207 Opus 4.6 \u4e92\u52d5\u7684\u591a\u7a2e\u65b9\u5f0f\u3002',
+        'access.a1.desc': '\u7528\u65bc\u5c0d\u8a71\u3001\u6587\u4ef6\u5206\u6790\u548c\u5275\u610f\u4efb\u52d9\u7684\u804a\u5929\u4ecb\u9762\u3002\u9069\u7528\u65bc Pro \u548c Team \u8a08\u756b\u3002',
+        'access.a1.price': '\u5305\u542b\u5728 <strong>Pro</strong> \u548c <strong>Team</strong> \u8a02\u95b1\u4e2d',
+        'access.a1.f1': '\u7db2\u9801\u548c\u884c\u52d5\u61c9\u7528',
+        'access.a1.f2': '\u6a94\u6848\u548c\u5716\u7247\u4e0a\u50b3',
+        'access.a1.f3': '\u5c08\u6848\u548c\u5de5\u4ef6',
+        'access.a1.f4': '\u64f4\u5c55\u601d\u7dad',
+        'access.a2.desc': '\u7528\u65bc\u69cb\u5efa\u61c9\u7528\u7a0b\u5f0f\u3001\u667a\u80fd\u9ad4\u548c\u81ea\u5b9a\u7fa9\u5de5\u4f5c\u6d41\u7684\u76f4\u63a5\u7de8\u7a0b\u8a2a\u554f\u3002',
+        'access.a2.price': '<strong>$5</strong> / \u767e\u842c\u8f38\u5165Token<br><strong>$25</strong> / \u767e\u842c\u8f38\u51faToken',
+        'access.a2.f1': 'Messages API \u548c\u4e32\u6d41\u50b3\u8f38',
+        'access.a2.f2': '\u5de5\u5177\u4f7f\u7528\u548c\u51fd\u6578\u547c\u53eb',
+        'access.a2.f3': '\u64f4\u5c55\u601d\u7dad',
+        'access.a2.f4': '\u6279\u6b21\u8655\u7406',
+        'access.a3.desc': '\u7528\u65bc\u7d42\u7aef\u4e2d\u8edf\u9ad4\u5de5\u7a0b\u7684\u667a\u80fd\u9ad4CLI\u5de5\u5177\u3002\u81ea\u4e3b\u898f\u5283\u3001\u7de8\u7a0b\u3001\u6e2c\u8a66\u548c\u63d0\u4ea4\u3002',
+        'access.a3.price': '\u4f7f\u7528 <strong>API \u5b9a\u50f9</strong> \u6216 <strong>Max \u8a08\u756b</strong>',
+        'access.a3.f1': '\u7d42\u7aef\u539f\u751f\u4ecb\u9762',
+        'access.a3.f2': '\u591a\u6587\u4ef6\u7de8\u8f2f',
+        'access.a3.f3': 'Git \u6574\u5408',
+        'access.a3.f4': 'MCP \u4f3a\u670d\u5668\u652f\u63f4',
+        // Footer
+        'footer.text': '\u00a9 2026 <a href="https://www.anthropic.com" target="_blank" rel="noopener">Anthropic</a>\u3002Claude Opus 4.6 \u2014 \u70ba\u5b89\u5168\u3001\u8aa0\u5be6\u548c\u771f\u6b63\u6709\u7528\u800c\u69cb\u5efa\u3002',
+        // Page
+        '_title': 'Claude Opus 4.6 \u2014 Anthropic \u9ad8\u7d1aAI\u7814\u7a76\u54e1',
+        '_featured': '\u63a8\u85a6'
+      }
+    };
+
+    // ── i18n Engine ───────────────────────────────────────
+    const htmlKeys = new Set([
+      'access.a1.price', 'access.a2.price', 'access.a3.price', 'footer.text'
+    ]);
+
+    let currentLang = sessionStorage.getItem('lang') || 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      sessionStorage.setItem('lang', lang);
+      const dict = translations[lang];
+      if (!dict) return;
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) {
+          if (htmlKeys.has(key)) {
+            el.innerHTML = dict[key];
+          } else {
+            el.textContent = dict[key];
+          }
+        }
+      });
+
+      // Update page title
+      if (dict['_title']) document.title = dict['_title'];
+
+      // Update html lang attribute
+      const langMap = { en: 'en', 'zh-CN': 'zh-CN', 'zh-TW': 'zh-TW' };
+      document.documentElement.lang = langMap[lang] || 'en';
+
+      // Update featured card label via CSS custom property
+      if (dict['_featured']) {
+        document.documentElement.style.setProperty('--featured-label', "'" + dict['_featured'] + "'");
+      }
+
+      // Update active button state
+      document.querySelectorAll('.lang-switcher button').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+    }
+
+    // Attach click handlers to language buttons
+    document.querySelectorAll('.lang-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.getAttribute('data-lang'));
+      });
+    });
+
+    // Apply saved language on load
+    if (currentLang !== 'en') {
+      setLanguage(currentLang);
+    }
+    // Ensure correct button is highlighted on load
+    document.querySelectorAll('.lang-switcher button').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === currentLang);
+    });
+
+    // ── Scroll Reveal ─────────────────────────────────────
     const revealElements = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
